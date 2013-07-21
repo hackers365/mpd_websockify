@@ -1,0 +1,64 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Playback options</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon protocol"><link rel="up" href="ch03.html" title="Chapter 3. Command reference"><link rel="prev" href="ch03.html" title="Chapter 3. Command reference"><link rel="next" href="ch03s03.html" title="Controlling playback"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Playback options</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Command reference</th><td width="20%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr></table><hr></div><div class="section" title="Playback options"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5172576"></a>Playback options</h2></div></div></div><div class="variablelist"><dl><dt><a name="command_consume"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">consume</code>  {<em class="replaceable"><code>STATE</code></em>}</p></div>
+          </span></dt><dd><p>
+              <sup>[<a href="ch03.html#ftn.since_0_15" class="footnoteref">2</a>]</sup>
+              Sets consume state to <code class="varname">STATE</code>,
+              <code class="varname">STATE</code> should be 0 or 1.
+	      When consume is activated, each song played is removed from playlist.
+            </p></dd><dt><a name="command_crossfade"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">crossfade</code>  {<em class="replaceable"><code>SECONDS</code></em>}</p></div>
+          </span></dt><dd><p>
+              Sets crossfading between songs.
+            </p></dd><dt><a name="command_mixrampdb"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">mixrampdb</code>  {<em class="replaceable"><code>deciBels</code></em>}</p></div>
+          </span></dt><dd><p>
+              Sets the threshold at which songs will be overlapped. Like crossfading but doesn't fade the track volume, just overlaps. The songs need to have MixRamp tags added by an external tool. 0dB is the normalized maximum volume so use negative values, I prefer -17dB. In the absence of mixramp tags crossfading will be used. See http://sourceforge.net/projects/mixramp
+            </p></dd><dt><a name="command_mixrampdelay"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">mixrampdelay</code>  {<em class="replaceable"><code>SECONDS</code></em>}</p></div>
+          </span></dt><dd><p>
+              Additional time subtracted from the overlap calculated by mixrampdb. A value of "nan" disables MixRamp overlapping and falls back to crossfading.
+            </p></dd><dt><a name="command_random"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">random</code>  {<em class="replaceable"><code>STATE</code></em>}</p></div>
+          </span></dt><dd><p>
+              Sets random state to <code class="varname">STATE</code>,
+              <code class="varname">STATE</code> should be 0 or 1.
+            </p></dd><dt><a name="command_repeat"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">repeat</code>  {<em class="replaceable"><code>STATE</code></em>}</p></div>
+          </span></dt><dd><p>
+              Sets repeat state to <code class="varname">STATE</code>,
+              <code class="varname">STATE</code> should be 0 or 1.
+            </p></dd><dt><a name="command_setvol"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">setvol</code>  {<em class="replaceable"><code>VOL</code></em>}</p></div>
+          </span></dt><dd><p>
+              Sets volume to <code class="varname">VOL</code>, the range of
+              volume is 0-100.
+            </p></dd><dt><a name="command_single"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">single</code>  {<em class="replaceable"><code>STATE</code></em>}</p></div>
+          </span></dt><dd><p>
+              <sup>[<a href="ch03.html#ftn.since_0_15" class="footnoteref">2</a>]</sup>
+              Sets single state to <code class="varname">STATE</code>,
+              <code class="varname">STATE</code> should be 0 or 1.
+	      When single is activated, playback is stopped after current song, or
+	      song is repeated if the 'repeat' mode is enabled.
+            </p></dd><dt><a name="command_replay_gain_mode"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">replay_gain_mode</code>  {<em class="replaceable"><code>MODE</code></em>}</p></div>
+          </span></dt><dd><p>
+              Sets the replay gain mode.  One of
+              <em class="parameter"><code>off</code></em>,
+              <em class="parameter"><code>track</code></em>,
+              <em class="parameter"><code>album</code></em>,
+              <em class="parameter"><code>auto</code></em><sup>[<a name="replay_gain_auto_since_0_16" href="ch03s02.html#ftn.replay_gain_auto_since_0_16" class="footnote">4</a>]</sup>.
+            </p><p>
+              Changing the mode during playback may take several
+              seconds, because the new settings does not affect the
+              buffered data.
+            </p><p>
+              This command triggers the
+              <span class="returnvalue">options</span> idle event.
+            </p></dd><dt><a name="command_replay_gain_status"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">replay_gain_status</code> </p></div>
+          </span></dt><dd><p>
+              Prints replay gain options.  Currently, only the
+              variable <code class="varname">replay_gain_mode</code> is
+              returned.
+            </p></dd></dl></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.replay_gain_auto_since_0_16" href="ch03s02.html#replay_gain_auto_since_0_16" class="simpara">4</a>] </sup>added in MPD 0.16</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3. Command reference </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Controlling playback</td></tr></table></div></body></html>

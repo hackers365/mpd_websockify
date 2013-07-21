@@ -1,0 +1,52 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Input plugins</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon - User's Manual"><link rel="up" href="ch05.html" title="Chapter 5. Plugin reference"><link rel="prev" href="ch05.html" title="Chapter 5. Plugin reference"><link rel="next" href="ch05s03.html" title="Decoder plugins"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Input plugins</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Plugin reference</th><td width="20%" align="right"> <a accesskey="n" href="ch05s03.html">Next</a></td></tr></table><hr></div><div class="section" title="Input plugins"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5551648"></a>Input plugins</h2></div></div></div><div class="section" title="curl"><div class="titlepage"><div><div><h3 class="title"><a name="idp5552288"></a><code class="varname">curl</code></h3></div></div></div><p>
+          Opens remote files or streams over HTTP.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">proxy</code>
+                </td><td>
+                  Sets the address of the HTTP proxy server.
+                </td></tr><tr><td>
+                  <code class="varname">proxy_user</code>,
+                  <code class="varname">proxy_password</code>
+                </td><td>
+                  Configures proxy authentication.
+                </td></tr></tbody></table></div></div><div class="section" title="file"><div class="titlepage"><div><div><h3 class="title"><a name="idp5560208"></a><code class="varname">file</code></h3></div></div></div><p>
+          Opens local files.
+        </p></div><div class="section" title="mms"><div class="titlepage"><div><div><h3 class="title"><a name="idp5561488"></a><code class="varname">mms</code></h3></div></div></div><p>
+          Plays streams with the MMS protocol.
+        </p></div><div class="section" title="cdio_paranoia"><div class="titlepage"><div><div><h3 class="title"><a name="idp5562848"></a><code class="varname">cdio_paranoia</code></h3></div></div></div><p>
+          Plays audio CDs.  The URI has the form:
+          "<code class="filename">cdda://[DEVICE][/TRACK]</code>".  The
+          simplest form <code class="filename">cdda://</code> plays the whole
+          disc in the default drive.
+        </p></div><div class="section" title="despotify"><div class="titlepage"><div><div><h3 class="title"><a name="idp5565536"></a><code class="varname">despotify</code></h3></div></div></div><p>
+          Plays <a class="ulink" href="http://www.spotify.com" target="_top">Spotify</a> tracks using the despotify
+          library. The despotify plugin uses a <code class="filename">spt://</code> URI and a Spotify
+          URL. So for example, you can add a song with:
+        </p><p>
+          <code class="filename">mpc add spt://spotify:track:5qENVY0YEdZ7fiuOax70x1</code>
+        </p><p>
+          You need a Spotify premium account to use this plugin, and you need
+          to setup username and password in the configuration file. The
+          configuration settings are global since the despotify playlist plugin
+          use the same settings.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">despotify_user</code>
+                </td><td>
+                  Sets up the Spotify username (required)
+                </td></tr><tr><td>
+                  <code class="varname">despotify_password</code>
+                </td><td>
+                  Sets up the Spotify password (required)
+                </td></tr><tr><td>
+                  <code class="varname">despotify_high_bitrate</code>
+                </td><td>
+                  Set up if high bitrate should be used for Spotify tunes.
+                  High bitrate sounds better but slow systems can have problems
+                  with playback (default yes).
+                </td></tr></tbody></table></div></div><div class="section" title="soup"><div class="titlepage"><div><div><h3 class="title"><a name="idp5577904"></a><code class="varname">soup</code></h3></div></div></div><p>
+          Opens remote files or streams over HTTP.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">proxy</code>
+                </td><td>
+                  Sets the address of the HTTP proxy server.
+                </td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 5. Plugin reference </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Decoder plugins</td></tr></table></div></body></html>

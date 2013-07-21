@@ -1,0 +1,24 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>systemd socket activation</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon - User's Manual"><link rel="up" href="ch02.html" title="Chapter 2. Installation"><link rel="prev" href="ch02s02.html" title="Compiling from source"><link rel="next" href="ch03.html" title="Chapter 3. Configuration"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center"><code class="filename">systemd</code> socket activation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02s02.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="ch03.html">Next</a></td></tr></table><hr></div><div class="section" title="systemd socket activation"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp203520"></a><code class="filename">systemd</code> socket activation</h2></div></div></div><p>
+        Using <code class="filename">systemd</code>, you can launch
+        <code class="filename">mpd</code> on demand when the first client
+        attempts to connect.  Create two files in
+        <code class="filename">/etc/systemd/system/</code>; first
+        <code class="filename">mpd.socket</code>:
+      </p><pre class="programlisting">[Socket]
+ListenStream=/run/mpd.socket
+ListenStream=6600
+[Install]
+WantedBy=sockets.target</pre><p>
+        Now create <code class="filename">mpd.service</code>:
+      </p><pre class="programlisting">[Unit]
+Description=Music Player Daemon
+After=sound.target
+[Service]
+ExecStart=/usr/bin/mpd --stdout --no-daemon</pre><p>
+        Start the socket:
+      </p><pre class="programlisting">systemctl enable mpd.socket
+systemctl start mpd.socket</pre><p>
+        In this configuration, <code class="filename">mpd</code> will ignore
+        the <code class="varname">bind_to_address</code> and
+        <code class="varname">port</code> settings.
+      </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Compiling from source </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. Configuration</td></tr></table></div></body></html>

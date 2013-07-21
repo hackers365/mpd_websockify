@@ -1,0 +1,74 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Stored playlists</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon protocol"><link rel="up" href="ch03.html" title="Chapter 3. Command reference"><link rel="prev" href="ch03s04.html" title="The current playlist"><link rel="next" href="ch03s06.html" title="The music database"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Stored playlists</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s04.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Command reference</th><td width="20%" align="right"> <a accesskey="n" href="ch03s06.html">Next</a></td></tr></table><hr></div><div class="section" title="Stored playlists"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5370720"></a>Stored playlists</h2></div></div></div><p>
+        Playlists are stored inside the configured playlist directory.
+        They are addressed with their file name (without the directory
+        and without the <code class="filename">.m3u</code> suffix).
+      </p><p>
+        Some of the commands described in this section can be used to
+        run playlist plugins instead of the hard-coded simple
+        <code class="filename">m3u</code> parser.  They can access playlists in
+        the music directory (relative path including the suffix) or
+        remote playlists (absolute URI with a supported scheme).
+      </p><div class="variablelist"><dl><dt><a name="command_listplaylist"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">listplaylist</code>  {<em class="replaceable"><code>NAME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Lists the songs in the playlist.  Playlist plugins are
+              supported.
+            </p></dd><dt><a name="command_listplaylistinfo"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">listplaylistinfo</code>  {<em class="replaceable"><code>NAME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Lists the songs with metadata in the playlist.  Playlist
+              plugins are supported.
+            </p></dd><dt><a name="command_listplaylists"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">listplaylists</code> </p></div>
+          </span></dt><dd><p>
+              Prints a list of the playlist directory.
+            </p><p>
+              After each playlist name the server sends its last
+              modification time as attribute "Last-Modified" in ISO
+              8601 format.  To avoid problems due to clock differences
+              between clients and the server, clients should not
+              compare this value with their local clock.
+            </p></dd><dt><a name="command_load"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">load</code>  {<em class="replaceable"><code>NAME</code></em>} [<em class="replaceable"><code>START:END</code></em>]</p></div>
+          </span></dt><dd><p>
+              Loads the playlist into the current queue.  Playlist
+              plugins are supported.  A range may be specified to load
+              only a part of the playlist.
+            </p></dd><dt><a name="command_playlistadd"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">playlistadd</code>  {<em class="replaceable"><code>NAME</code></em>} {<em class="replaceable"><code>URI</code></em>}</p></div>
+          </span></dt><dd><p>
+              Adds <code class="varname">URI</code> to the playlist
+              <code class="filename">NAME.m3u</code>.
+            </p><p>
+             <code class="filename">NAME.m3u</code> will be created if it does
+             not exist.
+            </p></dd><dt><a name="command_playlistclear"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">playlistclear</code>  {<em class="replaceable"><code>NAME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Clears the playlist <code class="filename">NAME.m3u</code>.
+            </p></dd><dt><a name="command_playlistdelete"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">playlistdelete</code>  {<em class="replaceable"><code>NAME</code></em>} {<em class="replaceable"><code>SONGPOS</code></em>}</p></div>
+          </span></dt><dd><p>
+              Deletes <code class="varname">SONGPOS</code> from the
+              playlist <code class="filename">NAME.m3u</code>.
+            </p></dd><dt><a name="command_playlistmove"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">playlistmove</code>  {<em class="replaceable"><code>NAME</code></em>} {<em class="replaceable"><code>SONGID</code></em>} {<em class="replaceable"><code>SONGPOS</code></em>}</p></div>
+          </span></dt><dd><p>
+              Moves <code class="varname">SONGID</code> in the playlist
+              <code class="filename">NAME.m3u</code> to the position
+              <code class="varname">SONGPOS</code>.
+            </p></dd><dt><a name="command_rename"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">rename</code>  {<em class="replaceable"><code>NAME</code></em>} {<em class="replaceable"><code>NEW_NAME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Renames the playlist <code class="filename">NAME.m3u</code> to <code class="filename">NEW_NAME.m3u</code>.
+            </p></dd><dt><a name="command_rm"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">rm</code>  {<em class="replaceable"><code>NAME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Removes the playlist <code class="filename">NAME.m3u</code> from
+              the playlist directory.
+            </p></dd><dt><a name="command_save"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">save</code>  {<em class="replaceable"><code>NAME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Saves the current playlist to
+              <code class="filename">NAME.m3u</code> in the playlist directory.
+            </p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s06.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The current playlist </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The music database</td></tr></table></div></body></html>

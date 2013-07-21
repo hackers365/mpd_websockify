@@ -1,0 +1,101 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>The music database</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon protocol"><link rel="up" href="ch03.html" title="Chapter 3. Command reference"><link rel="prev" href="ch03s05.html" title="Stored playlists"><link rel="next" href="ch03s07.html" title="Stickers"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The music database</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s05.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Command reference</th><td width="20%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a></td></tr></table><hr></div><div class="section" title="The music database"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5432624"></a>The music database</h2></div></div></div><div class="variablelist"><dl><dt><a name="command_count"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">count</code>  {<em class="replaceable"><code>TAG</code></em>} {<em class="replaceable"><code>NEEDLE</code></em>}</p></div>
+          </span></dt><dd><p>
+              Counts the number of songs and their total playtime in
+              the db matching <code class="varname">TAG</code> exactly.
+            </p></dd><dt><a name="command_find"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">find</code>  {<em class="replaceable"><code>TYPE</code></em>} {<em class="replaceable"><code>WHAT</code></em>} [<em class="replaceable"><code>...</code></em>]</p></div>
+          </span></dt><dd><p>
+              Finds songs in the db that are exactly
+              <code class="varname">WHAT</code>.  <code class="varname">TYPE</code> can
+              be any tag supported by MPD, or one of the two special
+              parameters — <em class="parameter"><code>file</code></em> to search by
+              full path (relative to database root), and
+              <em class="parameter"><code>any</code></em> to match against all
+              available tags.  <code class="varname">WHAT</code> is what to find.
+            </p></dd><dt><a name="command_findadd"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">findadd</code>  {<em class="replaceable"><code>TYPE</code></em>} {<em class="replaceable"><code>WHAT</code></em>} [<em class="replaceable"><code>...</code></em>]</p></div>
+          </span></dt><dd><p>
+              Finds songs in the db that are exactly
+              <code class="varname">WHAT</code> and adds them to current playlist.
+              Parameters have the same meaning as for <span class="command"><strong>find</strong></span>.
+            </p></dd><dt><a name="command_list"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">list</code>  {<em class="replaceable"><code>TYPE</code></em>} [<em class="replaceable"><code>ARTIST</code></em>]</p></div>
+          </span></dt><dd><p>
+              Lists all tags of the specified type.
+              <code class="varname">TYPE</code> can be any tag supported by MPD or
+              <em class="parameter"><code>file</code></em>.
+            </p><p>
+              <code class="varname">ARTIST</code> is an optional parameter when
+              type is album, this specifies to list albums by an
+              artist.
+            </p></dd><dt><a name="command_listall"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">listall</code>  [<em class="replaceable"><code>URI</code></em>]</p></div>
+          </span></dt><dd><p>
+              Lists all songs and directories in
+              <code class="varname">URI</code>.
+            </p></dd><dt><a name="command_listallinfo"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">listallinfo</code>  [<em class="replaceable"><code>URI</code></em>]</p></div>
+          </span></dt><dd><p>
+              Same as <span class="command"><strong>listall</strong></span>, except it also
+              returns metadata info in the same format as
+              <span class="command"><strong>lsinfo</strong></span>.
+            </p></dd><dt><a name="command_lsinfo"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">lsinfo</code>  [<em class="replaceable"><code>URI</code></em>]</p></div>
+          </span></dt><dd><p>
+              Lists the contents of the directory
+              <code class="varname">URI</code>.
+            </p><p>
+              When listing the root directory, this currently returns
+              the list of stored playlists.  This behavior is
+              deprecated; use "listplaylists" instead.
+            </p><p>
+              Clients that are connected via UNIX domain socket may
+              use this command to read the tags of an arbitrary local
+              file (URI beginning with "file:///").
+            </p></dd><dt><a name="command_search"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">search</code>  {<em class="replaceable"><code>TYPE</code></em>} {<em class="replaceable"><code>WHAT</code></em>} [<em class="replaceable"><code>...</code></em>]</p></div>
+          </span></dt><dd><p>
+              Searches for any song that contains
+              <code class="varname">WHAT</code>. Parameters have the same meaning
+              as for <span class="command"><strong>find</strong></span>, except that search is not
+              case sensitive.
+            </p></dd><dt><a name="command_searchadd"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">searchadd</code>  {<em class="replaceable"><code>TYPE</code></em>} {<em class="replaceable"><code>WHAT</code></em>} [<em class="replaceable"><code>...</code></em>]</p></div>
+          </span></dt><dd><p>
+              Searches for any song that contains <code class="varname">WHAT</code>
+              in tag <code class="varname">TYPE</code> and adds them to current playlist.
+            </p><p>
+              Parameters have the same meaning as for <span class="command"><strong>find</strong></span>,
+              except that search is not case sensitive.
+            </p></dd><dt><a name="command_searchaddpl"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">searchaddpl</code>  {<em class="replaceable"><code>NAME</code></em>} {<em class="replaceable"><code>TYPE</code></em>} {<em class="replaceable"><code>WHAT</code></em>} [<em class="replaceable"><code>...</code></em>]</p></div>
+          </span></dt><dd><p>
+              Searches for any song that contains <code class="varname">WHAT</code>
+              in tag <code class="varname">TYPE</code> and adds them to the playlist
+              named <code class="varname">NAME</code>.
+            </p><p>
+              If a playlist by that name doesn't exist it is created.
+            </p><p>
+              Parameters have the same meaning as for <span class="command"><strong>find</strong></span>,
+              except that search is not case sensitive.
+            </p></dd><dt><a name="command_update"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">update</code>  [<em class="replaceable"><code>URI</code></em>]</p></div>
+          </span></dt><dd><p>
+              Updates the music database: find new files, remove
+              deleted files, update modified files.
+            </p><p>
+              <code class="varname">URI</code> is a particular directory or
+              song/file to update.  If you do not specify it,
+              everything is updated.
+            </p><p>
+              Prints "updating_db: JOBID" where
+              <code class="varname">JOBID</code> is a positive number
+              identifying the update job.  You can read the current
+              job id in the <span class="command"><strong>status</strong></span> response.
+            </p></dd><dt><a name="command_rescan"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">rescan</code>  [<em class="replaceable"><code>URI</code></em>]</p></div>
+          </span></dt><dd><p>
+              Same as <span class="command"><strong>update</strong></span>, but also rescans
+              unmodified files.
+            </p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Stored playlists </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Stickers</td></tr></table></div></body></html>

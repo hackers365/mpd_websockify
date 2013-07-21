@@ -1,0 +1,17 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Command lists</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon protocol"><link rel="up" href="ch01.html" title="Chapter 1. General protocol syntax"><link rel="prev" href="ch01s03.html" title="Responses"><link rel="next" href="ch01s05.html" title="Ranges"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Command lists</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch01s03.html">Prev</a> </td><th width="60%" align="center">Chapter 1. General protocol syntax</th><td width="20%" align="right"> <a accesskey="n" href="ch01s05.html">Next</a></td></tr></table><hr></div><div class="section" title="Command lists"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="command_lists"></a>Command lists</h2></div></div></div><p>
+        To facilitate faster adding of files etc. you can pass a list
+        of commands all at once using a command list.  The command
+        list begins with <span class="command"><strong>command_list_begin</strong></span> or
+        <span class="command"><strong>command_list_ok_begin</strong></span> and ends with
+        <span class="command"><strong>command_list_end</strong></span>.
+      </p><p>
+        It does not execute any commands until the list has ended.
+        The return value is whatever the return for a list of commands
+        is.  On success for all commands,
+        <span class="returnvalue">OK</span> is returned.  If a command
+        fails, no more commands are executed and the appropriate
+        <span class="returnvalue">ACK</span> error is returned. If
+        <span class="command"><strong>command_list_ok_begin</strong></span> is used,
+        <span class="returnvalue">list_OK</span> is returned for each
+        successful command executed in the command list.
+      </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch01s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch01s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Responses </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Ranges</td></tr></table></div></body></html>

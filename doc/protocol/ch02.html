@@ -1,0 +1,25 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Chapter 2. Recipes</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon protocol"><link rel="up" href="index.html" title="The Music Player Daemon protocol"><link rel="prev" href="ch01s05.html" title="Ranges"><link rel="next" href="ch03.html" title="Chapter 3. Command reference"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 2. Recipes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch01s05.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch03.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter 2. Recipes"><div class="titlepage"><div><div><h2 class="title"><a name="idp109184"></a>Chapter 2. Recipes</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="ch02.html#idp109856">Queuing</a></span></dt></dl></div><div class="section" title="Queuing"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp109856"></a>Queuing</h2></div></div></div><p>
+        Often, users run MPD with "<a class="link" href="ch03s02.html#command_random">random</a>" enabled, but want to
+        be able to insert songs "before" the rest of the playlist.
+        That is commonly called "queuing".
+      </p><p>
+        MPD implements this by allowing the client to specify a
+        "priority" for each song in the playlist (commands <a class="link" href="ch03s04.html#command_prio"><span class="command"><strong>prio</strong></span></a> and
+        <a class="link" href="ch03s04.html#command_prioid"><span class="command"><strong>prioid</strong></span></a>).  A
+        higher priority means that the song is going to be played
+        before the other songs.
+      </p><p>
+        In "random" mode, MPD maintains an internal randomized
+        sequence of songs.  In this sequence, songs with a higher
+        priority come first, and all songs with the same priority are
+        shuffled (by default, all songs are shuffled, because all have
+        the same priority "0").  When you increase the priority of a
+        song, it is moved to the front of the sequence according to
+        its new priority, but always after the current one.  A song
+        that has been played already (it's "before" the current song
+        in that sequence) will only be scheduled for repeated playback
+        if its priority has become bigger than the priority of the
+        current song.  Decreasing the priority of a song will moved it
+        farther to the end of the sequence.  Changing the priority of
+        the current song has no effect on the sequence.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch01s05.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Ranges </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. Command reference</td></tr></table></div></body></html>

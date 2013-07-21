@@ -1,0 +1,21 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Configuring database plugins</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon - User's Manual"><link rel="up" href="ch03.html" title="Chapter 3. Configuration"><link rel="prev" href="ch03.html" title="Chapter 3. Configuration"><link rel="next" href="ch03s03.html" title="Configuring input plugins"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Configuring database plugins</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Configuration</th><td width="20%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr></table><hr></div><div class="section" title="Configuring database plugins"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp4420720"></a>Configuring database plugins</h2></div></div></div><p>
+        If a music directory is configured, one database plugin is
+        used.  To configure this plugin, add a
+        <code class="varname">database</code> block to
+        <code class="filename">mpd.conf</code>:
+      </p><pre class="programlisting">database {
+    plugin "simple"
+    path "/var/lib/mpd/db"
+}
+      </pre><p>
+        The following table lists the <code class="varname">database</code>
+        options valid for all plugins:
+      </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>
+                Name
+              </th><th>
+                Description
+              </th></tr></thead><tbody><tr><td>
+                <code class="varname">plugin</code>
+              </td><td>
+                The name of the plugin.
+              </td></tr></tbody></table></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3. Configuration </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Configuring input plugins</td></tr></table></div></body></html>

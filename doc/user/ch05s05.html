@@ -1,0 +1,353 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Output plugins</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon - User's Manual"><link rel="up" href="ch05.html" title="Chapter 5. Plugin reference"><link rel="prev" href="ch05s04.html" title="Encoder plugins"><link rel="next" href="ch05s06.html" title="Playlist plugins"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Output plugins</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05s04.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Plugin reference</th><td width="20%" align="right"> <a accesskey="n" href="ch05s06.html">Next</a></td></tr></table><hr></div><div class="section" title="Output plugins"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5649568"></a>Output plugins</h2></div></div></div><div class="section" title="alsa"><div class="titlepage"><div><div><h3 class="title"><a name="idp5650208"></a><code class="varname">alsa</code></h3></div></div></div><p>
+          The "Advanced Linux Sound Architecture" plugin uses
+          <code class="filename">libasound</code>.  It is recommended if you
+          are using Linux.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">device</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  Sets the device which should be used.  This can be
+                  any valid ALSA device name.  The default value is
+                  "default", which makes
+                  <code class="filename">libasound</code> choose a device.  It
+                  is recommended to use a "hw" or "plughw" device,
+                  because otherwise, <code class="filename">libasound</code>
+                  automatically enables "dmix", which has major
+                  disadvantages (fixed sample rate, poor resampler,
+                  ...).
+                </td></tr><tr><td>
+                  <code class="varname">use_mmap</code>
+                  <em class="parameter"><code>yes|no</code></em>
+                </td><td>
+                  If set to <em class="parameter"><code>yes</code></em>, then
+                  <code class="filename">libasound</code> will try to use
+                  memory mapped I/O.
+                </td></tr><tr><td>
+                  <code class="varname">buffer_time</code>
+                  <em class="parameter"><code>US</code></em>
+                </td><td>
+                  Sets the device's buffer time in microseconds.
+                  Don't change unless you know what you're doing.
+                </td></tr><tr><td>
+                  <code class="varname">period_time</code>
+                  <em class="parameter"><code>US</code></em>
+                </td><td>
+                  Sets the device's period time in microseconds.
+                  Don't change unless you really know what you're
+                  doing.
+                </td></tr><tr><td>
+                  <code class="varname">auto_resample</code>
+                  <em class="parameter"><code>yes|no</code></em>
+                </td><td>
+                  If set to <em class="parameter"><code>no</code></em>, then
+                  <code class="filename">libasound</code> will not attempt to
+                  resample, handing the responsibility over to MPD.
+                  It is recommended to let MPD resample (with
+                  libsamplerate), because ALSA is quite poor at doing
+                  so.
+                </td></tr><tr><td>
+                  <code class="varname">auto_channels</code>
+                  <em class="parameter"><code>yes|no</code></em>
+                </td><td>
+                  If set to <em class="parameter"><code>no</code></em>, then
+                  <code class="filename">libasound</code> will not attempt to
+                  convert between different channel numbers.
+                </td></tr><tr><td>
+                  <code class="varname">auto_format</code>
+                  <em class="parameter"><code>yes|no</code></em>
+                </td><td>
+                  If set to <em class="parameter"><code>no</code></em>, then
+                  <code class="filename">libasound</code> will not attempt to
+                  convert between different sample formats (16 bit, 24
+                  bit, floating point, ...).
+                </td></tr><tr><td>
+                  <code class="varname">dsd_usb</code>
+                  <em class="parameter"><code>yes|no</code></em>
+                </td><td>
+                  If set to <em class="parameter"><code>yes</code></em>, then DSD over
+                  USB according to the <a class="ulink" href="http://www.sonore.us/DoP_openStandard_1v1.pdf" target="_top">pro
+                  posed standard by dCS and others</a> is enabled.  This wraps
+                  DSD samples in fake 24 bit PCM, and is understood by
+                  some DSD capable products, but may be harmful to
+                  other hardware.  Therefore, the default is
+                  <em class="parameter"><code>no</code></em> and you can enable the
+                  option at your own risk.
+                </td></tr></tbody></table></div></div><div class="section" title="ao"><div class="titlepage"><div><div><h3 class="title"><a name="idp5682496"></a><code class="varname">ao</code></h3></div></div></div><p>
+          The <code class="varname">ao</code> plugin uses the portable
+          <code class="filename">libao</code> library.
+        </p></div><div class="section" title="fifo"><div class="titlepage"><div><div><h3 class="title"><a name="idp5684784"></a><code class="varname">fifo</code></h3></div></div></div><p>
+          The <code class="varname">fifo</code> plugin writes raw PCM data to a
+          FIFO (First In, First Out) file.  The data can be read by
+          another program.
+        </p></div><div class="section" title="ffado"><div class="titlepage"><div><div><h3 class="title"><a name="idp5686608"></a><code class="varname">ffado</code></h3></div></div></div><p>
+          The <code class="varname">ffado</code> plugin connects to FireWire
+          audio devices via <code class="filename">libffado</code>.
+        </p><p>
+          Warning: this plugin was not tested successfully.  I just
+          couldn't keep libffado2 from crashing.  Use at your own
+          risk.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">device</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  Sets the device which should be used, e.g. "hw:0".
+                </td></tr></tbody></table></div></div><div class="section" title="jack"><div class="titlepage"><div><div><h3 class="title"><a name="idp5694720"></a><code class="varname">jack</code></h3></div></div></div><p>
+          The <code class="varname">jack</code> plugin connects to a JACK
+          server.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">client_name</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  The name of the JACK client.  Defaults to "Music
+                  Player Daemon".
+                </td></tr><tr><td>
+                  <code class="varname">server_name</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  Optional name of the JACK server.
+                </td></tr><tr><td>
+                  <code class="varname">autostart</code>
+                  <em class="parameter"><code>yes|no</code></em>
+                </td><td>
+                  If set to <em class="parameter"><code>yes</code></em>, then
+                  <code class="filename">libjack</code> will automatically
+                  launch the JACK daemon.  Disabled by default.
+                </td></tr><tr><td>
+                  <code class="varname">source_ports</code>
+                  <em class="parameter"><code>A,B</code></em>
+                </td><td>
+                  The names of the JACK source ports to be created.
+                  By default, the ports "left" and "right" are
+                  created.  To use more ports, you have to tweak this
+                  option.
+                </td></tr><tr><td>
+                  <code class="varname">destination_ports</code>
+                  <em class="parameter"><code>A,B</code></em>
+                </td><td>
+                  The names of the JACK destination ports to connect to.
+                </td></tr><tr><td>
+                  <code class="varname">ringbuffer_size</code>
+                  <em class="parameter"><code>NBYTES</code></em>
+                </td><td>
+                  Sets the size of the ring buffer for each channel.
+                  Do not configure this value unless you know what
+                  you're doing.
+                </td></tr></tbody></table></div></div><div class="section" title="mvp"><div class="titlepage"><div><div><h3 class="title"><a name="idp5714416"></a><code class="varname">mvp</code></h3></div></div></div><p>
+          The <code class="varname">mvp</code> plugin uses the proprietary
+          Hauppauge Media MVP interface.  We do not know any user of
+          this plugin, and we do not know if it actually works.
+        </p></div><div class="section" title="httpd"><div class="titlepage"><div><div><h3 class="title"><a name="idp5716272"></a><code class="varname">httpd</code></h3></div></div></div><p>
+          The <code class="varname">httpd</code> plugin creates a HTTP server,
+          similar to ShoutCast / IceCast.  HTTP streaming clients like
+          <code class="filename">mplayer</code> can connect to it.
+        </p><p>
+          You must configure either <code class="varname">quality</code> or
+          <code class="varname">bitrate</code>.  It is highly recommended to
+          configure a fixed <code class="varname">format</code>, because a
+          stream cannot switch its audio format on-the-fly when the
+          song changes.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">port</code>
+                  <em class="parameter"><code>P</code></em>
+                </td><td>
+                  Binds the HTTP server to the specified port.
+                </td></tr><tr><td>
+                  <code class="varname">bind_to_address</code>
+                  <em class="parameter"><code>ADDR</code></em>
+                </td><td>
+                  Binds the HTTP server to the specified address (IPv4 or
+                  IPv6). Multiple addresses in parallel are not supported.
+                </td></tr><tr><td>
+                  <code class="varname">encoder</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  Chooses an encoder plugin,
+                  e.g. <em class="parameter"><code>vorbis</code></em>.
+                </td></tr><tr><td>
+                  <code class="varname">quality</code>
+                  <em class="parameter"><code>Q</code></em>
+                </td><td>
+                  Configures the encoder quality (for VBR) in the
+                  range -1 .. 10.
+                </td></tr><tr><td>
+                  <code class="varname">bitrate</code>
+                  <em class="parameter"><code>BR</code></em>
+                </td><td>
+                  Sets a constant encoder bit rate, in kilobit per
+                  second.
+                </td></tr><tr><td>
+                  <code class="varname">max_clients</code>
+                  <em class="parameter"><code>MC</code></em>
+                </td><td>
+                  Sets a limit, number of concurrent clients. When set
+                  to 0 no limit will apply.
+                </td></tr></tbody></table></div></div><div class="section" title="null"><div class="titlepage"><div><div><h3 class="title"><a name="idp5737696"></a><code class="varname">null</code></h3></div></div></div><p>
+          The <code class="varname">null</code> plugin does nothing.  It
+          discards everything sent to it.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">sync</code>
+                  <em class="parameter"><code>yes|no</code></em>
+                </td><td>
+                  If set to <em class="parameter"><code>no</code></em>, then the timer
+                  is disabled - the device will accept PCM chunks at
+                  arbitrary rate (useful for benchmarking).  The
+                  default behaviour is to play in real time.
+                </td></tr></tbody></table></div></div><div class="section" title="oss"><div class="titlepage"><div><div><h3 class="title"><a name="idp5745408"></a><code class="varname">oss</code></h3></div></div></div><p>
+          The "Open Sound System" plugin is supported on most Unix
+          platforms.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">device</code>
+                  <em class="parameter"><code>PATH</code></em>
+                </td><td>
+                  Sets the path of the PCM device.  If not specified,
+                  then MPD will attempt to open
+                  <code class="filename">/dev/sound/dsp</code> and
+                  <code class="filename">/dev/dsp</code>.
+                </td></tr></tbody></table></div></div><div class="section" title="openal"><div class="titlepage"><div><div><h3 class="title"><a name="idp5753296"></a><code class="varname">openal</code></h3></div></div></div><p>
+          The "OpenAL" plugin uses <code class="filename">libopenal</code>.
+          It is supported on many platforms.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">device</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  Sets the device which should be used.  This can be
+                  any valid OpenAL device name. If not specified, then
+                  <code class="filename">libopenal</code> will choose a default device.
+                </td></tr></tbody></table></div></div><div class="section" title="osx"><div class="titlepage"><div><div><h3 class="title"><a name="idp5761088"></a><code class="varname">osx</code></h3></div></div></div><p>
+          The "Mac OS X" plugin uses Apple's CoreAudio API.
+        </p></div><div class="section" title="pipe"><div class="titlepage"><div><div><h3 class="title"><a name="idp5762448"></a><code class="varname">pipe</code></h3></div></div></div><p>
+          The <code class="varname">pipe</code> plugin starts a program and
+          writes raw PCM data into its standard input.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">command</code>
+                  <em class="parameter"><code>CMD</code></em>
+                </td><td>
+                  This command is invoked with the shell.
+                </td></tr></tbody></table></div></div><div class="section" title="pulse"><div class="titlepage"><div><div><h3 class="title"><a name="idp5769408"></a><code class="varname">pulse</code></h3></div></div></div><p>
+          The <code class="varname">pulse</code> plugin connects to a PulseAudio
+          server.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">server</code>
+                  <em class="parameter"><code>HOSTNAME</code></em>
+                </td><td>
+                  Sets the host name of the PulseAudio server.  By
+                  default, MPD connects to the local PulseAudio
+                  server.
+                </td></tr><tr><td>
+                  <code class="varname">sink</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  Specifies the name of the PulseAudio sink MPD should
+                  play on.
+                </td></tr></tbody></table></div></div><div class="section" title="recorder"><div class="titlepage"><div><div><h3 class="title"><a name="idp5778720"></a><code class="varname">recorder</code></h3></div></div></div><p>
+          The <code class="varname">recorder</code> plugin writes the audio
+          played by MPD to a file.  This may be useful for recording
+          radio streams.
+        </p><p>
+          You must configure either <code class="varname">quality</code> or
+          <code class="varname">bitrate</code>.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">path</code>
+                  <em class="parameter"><code>P</code></em>
+                </td><td>
+                  Write to this file.
+                </td></tr><tr><td>
+                  <code class="varname">encoder</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  Chooses an encoder plugin,
+                  e.g. <em class="parameter"><code>vorbis</code></em>.
+                </td></tr><tr><td>
+                  <code class="varname">quality</code>
+                  <em class="parameter"><code>Q</code></em>
+                </td><td>
+                  Configures the encoder quality (for VBR) in the
+                  range -1 .. 10.
+                </td></tr><tr><td>
+                  <code class="varname">bitrate</code>
+                  <em class="parameter"><code>BR</code></em>
+                </td><td>
+                  Sets a constant encoder bit rate, in kilobit per
+                  second.
+                </td></tr></tbody></table></div></div><div class="section" title="shout"><div class="titlepage"><div><div><h3 class="title"><a name="idp5794208"></a><code class="varname">shout</code></h3></div></div></div><p>
+          The <code class="varname">shout</code> plugin connects to a ShoutCast
+          or IceCast server.  It forwards tags to this server.
+        </p><p>
+          You must set a <code class="varname">format</code>.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">host</code>
+                  <em class="parameter"><code>HOSTNAME</code></em>
+                </td><td>
+                  Sets the host name of the Shoutcast/Icecast server.
+                </td></tr><tr><td>
+                  <code class="varname">port</code>
+                  <em class="parameter"><code>PORTNUMBER</code></em>
+                </td><td>
+                  Connect to this port number on the specified host.
+                </td></tr><tr><td>
+                  <code class="varname">timeout</code>
+                  <em class="parameter"><code>SECONDS</code></em>
+                </td><td>
+                  Set the timeout for the shout connection in seconds.
+                  Defaults to 2 seconds.
+                </td></tr><tr><td>
+                  <code class="varname">mount</code>
+                  <em class="parameter"><code>URI</code></em>
+                </td><td>
+                  Mounts the MPD stream in the specified URI.
+                </td></tr><tr><td>
+                  <code class="varname">user</code>
+                  <em class="parameter"><code>USERNAME</code></em>
+                </td><td>
+                  Sets the user name for submitting the stream to the
+                  server.  Default is "source".
+                </td></tr><tr><td>
+                  <code class="varname">password</code>
+                  <em class="parameter"><code>PWD</code></em>
+                </td><td>
+                  Sets the password for submitting the stream to the
+                  server.
+                </td></tr><tr><td>
+                  <code class="varname">name</code>
+                  <em class="parameter"><code>NAME</code></em>
+                </td><td>
+                  Sets the name of the stream.
+                </td></tr><tr><td>
+                  <code class="varname">genre</code>
+                  <em class="parameter"><code>GENRE</code></em>
+                </td><td>
+                  Sets the genre of the stream (optional).
+                </td></tr><tr><td>
+                  <code class="varname">description</code>
+                  <em class="parameter"><code>DESCRIPTION</code></em>
+                </td><td>
+                  Sets a short description of the stream (optional).
+                </td></tr><tr><td>
+                  <code class="varname">url</code>
+                  <em class="parameter"><code>URL</code></em>
+                </td><td>
+                  Sets a URL associated with the stream (optional).
+                </td></tr><tr><td>
+                  <code class="varname">public</code>
+                  <em class="parameter"><code>yes|no</code></em>
+                </td><td>
+                  Specifies whether the stream should be "public".
+                  Default is "no".
+                </td></tr><tr><td>
+                  <code class="varname">encoder</code>
+                  <em class="parameter"><code>PLUGIN</code></em>
+                </td><td>
+                  Sets the name of the encoder plugin.  Default is
+                  "vorbis".  "vorbis" and "lame" are valid encoder
+                  plugins (provided that you enabled them at compile
+                  time).
+                </td></tr></tbody></table></div></div><div class="section" title="solaris"><div class="titlepage"><div><div><h3 class="title"><a name="idp5827056"></a><code class="varname">solaris</code></h3></div></div></div><p>
+          The "Solaris" plugin runs only on SUN Solaris, and plays via
+          <code class="filename">/dev/audio</code>.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">device</code>
+                  <em class="parameter"><code>PATH</code></em>
+                </td><td>
+                  Sets the path of the audio device, defaults to
+                  <code class="filename">/dev/audio</code>.
+                </td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05s04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s06.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Encoder plugins </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Playlist plugins</td></tr></table></div></body></html>

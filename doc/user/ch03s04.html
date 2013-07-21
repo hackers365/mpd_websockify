@@ -1,0 +1,26 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Configuring decoder plugins</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon - User's Manual"><link rel="up" href="ch03.html" title="Chapter 3. Configuration"><link rel="prev" href="ch03s03.html" title="Configuring input plugins"><link rel="next" href="ch03s05.html" title="Configuring encoder plugins"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Configuring decoder plugins</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s03.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Configuration</th><td width="20%" align="right"> <a accesskey="n" href="ch03s05.html">Next</a></td></tr></table><hr></div><div class="section" title="Configuring decoder plugins"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp93824"></a>Configuring decoder plugins</h2></div></div></div><p>
+        Most decoder plugins do not need any special configuration.
+        To configure a decoder, add a <code class="varname">decoder</code> block
+        to <code class="filename">mpd.conf</code>:
+      </p><pre class="programlisting">decoder {
+    plugin "wildmidi"
+    config_file "/etc/timidity/timidity.cfg"
+}
+      </pre><p>
+        The following table lists the <code class="varname">decoder</code>
+        options valid for all plugins:
+      </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>
+                Name
+              </th><th>
+                Description
+              </th></tr></thead><tbody><tr><td>
+                <code class="varname">plugin</code>
+              </td><td>
+                The name of the plugin.
+              </td></tr><tr><td>
+                <code class="varname">enabled</code>
+                <em class="parameter"><code>yes|no</code></em>
+              </td><td>
+                Allows you to disable a decoder plugin without
+                recompiling.  By default, all plugins are enabled.
+              </td></tr></tbody></table></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Configuring input plugins </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Configuring encoder plugins</td></tr></table></div></body></html>

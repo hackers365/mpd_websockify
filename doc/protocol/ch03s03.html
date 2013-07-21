@@ -1,0 +1,47 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Controlling playback</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon protocol"><link rel="up" href="ch03.html" title="Chapter 3. Command reference"><link rel="prev" href="ch03s02.html" title="Playback options"><link rel="next" href="ch03s04.html" title="The current playlist"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Controlling playback</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s02.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Command reference</th><td width="20%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a></td></tr></table><hr></div><div class="section" title="Controlling playback"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5223680"></a>Controlling playback</h2></div></div></div><div class="variablelist"><dl><dt><a name="command_next"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">next</code> </p></div>
+          </span></dt><dd><p>
+              Plays next song in the playlist.
+            </p></dd><dt><a name="command_pause"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">pause</code>  {<em class="replaceable"><code>PAUSE</code></em>}</p></div>
+          </span></dt><dd><p>
+              Toggles pause/resumes playing, <code class="varname">PAUSE</code> is 0 or 1.
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                The use of pause command w/o the PAUSE argument is
+                deprecated.
+              </p></div></dd><dt><a name="command_play"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">play</code>  [<em class="replaceable"><code>SONGPOS</code></em>]</p></div>
+          </span></dt><dd><p>
+              Begins playing the playlist at song number
+              <code class="varname">SONGPOS</code>.
+            </p></dd><dt><a name="command_playid"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">playid</code>  [<em class="replaceable"><code>SONGID</code></em>]</p></div>
+          </span></dt><dd><p>
+              Begins playing the playlist at song
+              <code class="varname">SONGID</code>.
+            </p></dd><dt><a name="command_previous"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">previous</code> </p></div>
+          </span></dt><dd><p>
+              Plays previous song in the playlist.
+            </p></dd><dt><a name="command_seek"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">seek</code>  {<em class="replaceable"><code>SONGPOS</code></em>} {<em class="replaceable"><code>TIME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Seeks to the position <code class="varname">TIME</code> (in
+              seconds) of entry <code class="varname">SONGPOS</code> in the
+              playlist.
+            </p></dd><dt><a name="command_seekid"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">seekid</code>  {<em class="replaceable"><code>SONGID</code></em>} {<em class="replaceable"><code>TIME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Seeks to the position <code class="varname">TIME</code> (in
+              seconds) of song <code class="varname">SONGID</code>.
+            </p></dd><dt><a name="command_seekcur"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">seekcur</code>  {<em class="replaceable"><code>TIME</code></em>}</p></div>
+          </span></dt><dd><p>
+              Seeks to the position <code class="varname">TIME</code> within the
+              current song.  If prefixed by '+' or '-', then the time
+              is relative to the current playing position.
+            </p></dd><dt><a name="command_stop"></a><span class="term">
+            <div class="cmdsynopsis"><p><code class="command">stop</code> </p></div>
+          </span></dt><dd><p>
+              Stops playing.
+            </p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Playback options </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The current playlist</td></tr></table></div></body></html>

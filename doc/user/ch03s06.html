@@ -1,0 +1,102 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Configuring audio outputs</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon - User's Manual"><link rel="up" href="ch03.html" title="Chapter 3. Configuration"><link rel="prev" href="ch03s05.html" title="Configuring encoder plugins"><link rel="next" href="ch03s07.html" title="Configuring filters"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Configuring audio outputs</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s05.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Configuration</th><td width="20%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a></td></tr></table><hr></div><div class="section" title="Configuring audio outputs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp106848"></a>Configuring audio outputs</h2></div></div></div><p>
+        Audio outputs are devices which actually play the audio chunks
+        produced by MPD.  You can configure any number of audio output
+        devices, but there must be at least one.  If none is
+        configured, MPD attempts to auto-detect.  Usually, this works
+        quite well with ALSA, OSS and on Mac OS X.
+      </p><p>
+        To configure an audio output manually, add an
+        <code class="varname">audio_output</code> block to
+        <code class="filename">mpd.conf</code>:
+      </p><pre class="programlisting">audio_output {
+    type "alsa"
+    name "my ALSA device"
+    device "hw:0"
+}
+      </pre><p>
+        The following table lists the <code class="varname">audio_output</code>
+        options valid for all plugins:
+      </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>
+                Name
+              </th><th>
+                Description
+              </th></tr></thead><tbody><tr><td>
+                <code class="varname">type</code>
+              </td><td>
+                The name of the plugin.
+              </td></tr><tr><td>
+                <code class="varname">name</code>
+              </td><td>
+                The name of the audio output.  It is visible to the
+                client.  Some plugins also use it internally, e.g. as
+                a name registered in the PULSE server.
+              </td></tr><tr><td>
+                <code class="varname">format</code>
+              </td><td>
+                <p>
+                  Always open the audio output with the specified audio
+                  format (samplerate:bits:channels), regardless of the
+                  format of the input file.  This is optional for most
+                  plugins.
+                </p>
+                <p>
+                  Any of the three attributes may be an asterisk to
+                  specify that this attribute should not be enforced,
+                  example: <em class="parameter"><code>48000:16:*</code></em>.
+                  <em class="parameter"><code>*:*:*</code></em> is equal to not having
+                  a <code class="varname">format</code> specification.
+                </p>
+                <p>
+                  The following values are valid for
+                  <code class="varname">bits</code>: <code class="varname">8</code>
+                  (signed 8 bit integer samples),
+                  <code class="varname">16</code>, <code class="varname">24</code> (signed
+                  24 bit integer samples padded to 32 bit),
+                  <code class="varname">24_3</code> (signed 24 bit integer
+                  samples, no padding, 3 bytes per sample),
+                  <code class="varname">32</code> (signed 32 bit integer
+                  samples), <code class="varname">f</code> (32 bit floating
+                  point, -1.0 to 1.0).
+                </p>
+              </td></tr><tr><td>
+                <code class="varname">enabled</code>
+                  <em class="parameter"><code>yes|no</code></em>
+              </td><td>
+                Specifies whether this audio output is enabled when
+                MPD is started.  By default, all audio outputs are
+                enabled.
+              </td></tr><tr><td>
+                <code class="varname">tags</code>
+                <em class="parameter"><code>yes|no</code></em>
+              </td><td>
+                If set to "no", then MPD will not send tags to this
+                output.  This is only useful for output plugins that
+                can receive tags, for example the
+                <code class="varname">httpd</code> output plugin.
+              </td></tr><tr><td>
+                <code class="varname">always_on</code>
+                  <em class="parameter"><code>yes|no</code></em>
+              </td><td>
+                If set to "yes", then MPD attempts to keep this audio
+                output always open.  This may be useful for streaming
+                servers, when you don't want to disconnect all
+                listeners even when playback is accidentally stopped.
+              </td></tr><tr><td>
+                <code class="varname">mixer_type</code>
+                <em class="parameter"><code>hardware|software|none</code></em>
+              </td><td>
+                Specifies which mixer should be used for this audio
+                output: the hardware mixer (available for ALSA, OSS
+                and PulseAudio), the software mixer or no mixer
+                ("none").  By default, the hardware mixer is used for
+                devices which support it, and none for the others.
+              </td></tr><tr><td>
+                <code class="varname">replay_gain_handler</code>
+                <em class="parameter"><code>software|mixer|none</code></em>
+              </td><td>
+                Specifies how replay gain is applied.  The default is
+                "software", which uses an internal software volume
+                control.  "mixer" uses the configured (hardware) mixer
+                control.  "none" disables replay gain on this audio
+                output.
+              </td></tr></tbody></table></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Configuring encoder plugins </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Configuring filters</td></tr></table></div></body></html>

@@ -1,0 +1,53 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Encoder plugins</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="The Music Player Daemon - User's Manual"><link rel="up" href="ch05.html" title="Chapter 5. Plugin reference"><link rel="prev" href="ch05s03.html" title="Decoder plugins"><link rel="next" href="ch05s05.html" title="Output plugins"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Encoder plugins</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05s03.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Plugin reference</th><td width="20%" align="right"> <a accesskey="n" href="ch05s05.html">Next</a></td></tr></table><hr></div><div class="section" title="Encoder plugins"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5613888"></a>Encoder plugins</h2></div></div></div><div class="section" title="flac"><div class="titlepage"><div><div><h3 class="title"><a name="idp5614528"></a><code class="varname">flac</code></h3></div></div></div><p>
+          Encodes into FLAC (lossless).
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">compression</code>
+                </td><td>
+                  Sets the <code class="filename">libFLAC</code> compression
+                  level.  The levels range from 0 (fastest, least
+                  compression) to 8 (slowest, most compression).
+                </td></tr></tbody></table></div></div><div class="section" title="lame"><div class="titlepage"><div><div><h3 class="title"><a name="idp5621072"></a><code class="varname">lame</code></h3></div></div></div><p>
+          Encodes into MP3 using the LAME library.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">quality</code>
+                </td><td>
+                  Sets the quality for VBR.  0 is the highest quality,
+                  9 is the lowest quality.  Cannot be used with
+                  <code class="varname">bitrate</code>.
+                </td></tr><tr><td>
+                  <code class="varname">bitrate</code>
+                </td><td>
+                  Sets the bit rate in kilobit per second.  Cannot be
+                  used with <code class="varname">quality</code>.
+                </td></tr></tbody></table></div></div><div class="section" title="null"><div class="titlepage"><div><div><h3 class="title"><a name="idp5629488"></a><code class="varname">null</code></h3></div></div></div><p>
+          Does not encode anything, passes the input PCM data as-is.
+        </p></div><div class="section" title="twolame"><div class="titlepage"><div><div><h3 class="title"><a name="idp5630864"></a><code class="varname">twolame</code></h3></div></div></div><p>
+          Encodes into MP2 using the <code class="filename">twolame</code>
+          library.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">quality</code>
+                </td><td>
+                  Sets the quality for VBR.  0 is the highest quality,
+                  9 is the lowest quality.  Cannot be used with
+                  <code class="varname">bitrate</code>.
+                </td></tr><tr><td>
+                  <code class="varname">bitrate</code>
+                </td><td>
+                  Sets the bit rate in kilobit per second.  Cannot be
+                  used with <code class="varname">quality</code>.
+                </td></tr></tbody></table></div></div><div class="section" title="vorbis"><div class="titlepage"><div><div><h3 class="title"><a name="idp5639824"></a><code class="varname">vorbis</code></h3></div></div></div><p>
+          Encodes into Ogg Vorbis.
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Setting</th><th>Description</th></tr></thead><tbody><tr><td>
+                  <code class="varname">quality</code>
+                </td><td>
+                  Sets the quality for VBR.  -1 is the lowest quality,
+                  10 is the highest quality.  Cannot be used with
+                  <code class="varname">bitrate</code>.
+                </td></tr><tr><td>
+                  <code class="varname">bitrate</code>
+                </td><td>
+                  Sets the bit rate in kilobit per second.  Cannot be
+                  used with <code class="varname">quality</code>.
+                </td></tr></tbody></table></div></div><div class="section" title="wave"><div class="titlepage"><div><div><h3 class="title"><a name="idp5648160"></a><code class="varname">wave</code></h3></div></div></div><p>
+          Encodes into WAV (lossless).
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Decoder plugins </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Output plugins</td></tr></table></div></body></html>
