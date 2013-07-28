@@ -1,10 +1,20 @@
 var fail_count = 0;
-var ws;
+
+var ws,
+    cmd_queue = {};         //cmd sequence
 $(document)
 .on('click', '#send', on_write)
-.on('keypress', '#send_text', key_write);
+.on('keypress', '#send_text', key_write)
+.on('click', '#clear_log', clear_log)
+.on('click', '._cmd', send_cmd);
+
 
 connect();
+function send_cmd() {
+    var $this = $(this),
+        cmd = $this.attr('cmd');
+    ws.send_string(cmd + "\n");
+}
 function connect() {
     ws = new Websock();
     ws.on('message', on_read);
@@ -15,10 +25,14 @@ function connect() {
     console.log(r);
 }
 
+function clear_log() {
+    $('#view').val('');
+}
+
 function on_read() {
     var len = ws.rQlen();
     if (len > 0) {
-        var str = ws.rQshiftStr(len);
+        var str = ws.rQshiftStr();
         $('#view').val($('#view').val() + '\n' + str);
     }
 }

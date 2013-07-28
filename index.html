@@ -1,7 +1,13 @@
 <html>
     <body>
         <p>
-        <input type="text" id="send_text" size=30 /><input id="send" type="button" value="send"/>
+            <input type="button" cmd="play" name="play" class="_cmd" value="play" />
+            <input type="button" cmd="stop" name="stop" class="_cmd" value="stop" />
+            <input type="button" cmd="status" name="status" class="_cmd" value="status" />
+            <input type="button" cmd="currentsong" name="currentsong" class="_cmd" value="get_current" />
+        </p>
+        <p>
+        <input type="text" id="send_text" size=30 /><input id="send" type="button" value="send"/><input id="clear_log" type="button" value="clear log"/>
         </p>
         <div id="info"></div>
         <textarea id="view" style="width:400;height:400;">
