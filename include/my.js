@@ -1,68 +1,78 @@
-var fail_count = 0;
 
-var ws,
-    cmd_queue = {};         //cmd sequence
+var __MY_MPD = {
+    fail_count: 0,
+    my_buf: '',
+    __MY_MPD.ws: nil,
+    ws: '',
+
+    send_cmd: function () {
+        var $this = $(this),
+            cmd = $this.attr('cmd');
+        cmd_queue.push(cmd);
+        __MY_MPD.ws.send_string(cmd + "\n");
+    },
+    connect: function() {
+        __MY_MPD.ws = new Websock();
+        __MY_MPD.ws.on('message', on_read);
+        __MY_MPD.ws.on('close', close);
+        __MY_MPD.ws.on('open', open);
+
+        var r = __MY_MPD.ws.open('__MY_MPD.ws://localhost:10001', 'base64');
+        console.log(r);
+    },
+
+    clear_log: function() {
+        $('#view').val('');
+    }
+
+    on_read: function() {
+        var len = __MY_MPD.ws.rQlen();
+        if (len > 0) {
+            var str = __MY_MPD.ws.rQshiftStr(len);
+            $('#view').val(str + '\n' + $('#view').val());
+        }
+    }
+
+    key_write: function(e) {
+        if (typeof(e) == 'object' && e.keyCode == 13) {
+            __MY_MPD.on_write();
+        }
+    },
+
+    process_result: function() {
+
+    },
+    on_write: function() {
+        var str = $('#send_text').val() + "\n";
+        __MY_MPD.ws.send_string(str);
+        $('#send_text').val('');
+    },
+
+    open: function() {
+
+    },
+
+    fail_connect: function() {
+        $('#info').text('try to connect count ' + __MY_MPD.fail_count);
+        return function() {
+            __MY_MPD.connect();
+        }
+    },
+    function close() {
+        if (__MY_MPD.fail_count > 5) {
+            $('#info').text('fail connect');
+            return;
+        }
+        setTimeout(__MY_MPD.connect, 5000 * __MY_MPD.fail_count);
+        __MY_MPD.fail_count++;
+    }
+}
+
 $(document)
-.on('click', '#send', on_write)
-.on('keypress', '#send_text', key_write)
-.on('click', '#clear_log', clear_log)
-.on('click', '._cmd', send_cmd);
+.on('click', '#send', __MY_MPD.on_write)
+.on('keypress', '#send_text', __MY_MPD.key_write)
+.on('click', '#clear_log', __MY_MPD.clear_log)
+.on('click', '._cmd', __MY_MPD.send_cmd);
 
 
-connect();
-function send_cmd() {
-    var $this = $(this),
-        cmd = $this.attr('cmd');
-    ws.send_string(cmd + "\n");
-}
-function connect() {
-    ws = new Websock();
-    ws.on('message', on_read);
-    ws.on('close', close);
-    ws.on('open', open);
-
-    var r = ws.open('ws://localhost:10001', 'base64');
-    console.log(r);
-}
-
-function clear_log() {
-    $('#view').val('');
-}
-
-function on_read() {
-    var len = ws.rQlen();
-    if (len > 0) {
-        var str = ws.rQshiftStr();
-        $('#view').val($('#view').val() + '\n' + str);
-    }
-}
-
-function key_write(e) {
-    if (typeof(e) == 'object' && e.keyCode == 13) {
-        on_write();
-    }
-}
-function on_write() {
-    var str = $('#send_text').val() + "\n";
-    ws.send_string(str);
-    $('#send_text').val('');
-}
-
-function open() {
-
-}
-
-function fail_connect() {
-    $('#info').text('try to connect count ' + fail_count);
-    return function() {
-        connect();
-    }
-}
-function close() {
-    if (fail_count > 5) {
-        $('#info').text('fail connect');
-        return;
-    }
-    setTimeout(connect, 5000 * fail_count);
-    fail_count++;
-}
+__MY_MPD.connect();
