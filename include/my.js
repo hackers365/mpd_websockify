@@ -26,9 +26,9 @@ function connect() {
     console.log(r);
 }
 
-function clear_log() {
-    $('#view').val('');
-}
+        var r = __MY_MPD.ws.open('__MY_MPD.ws://localhost:10001', 'base64');
+        console.log(r);
+    },
 
 function on_read() {
     var len = ws.rQlen();
@@ -36,12 +36,6 @@ function on_read() {
         __protocol.buf = buf.concat(ws.rQshiftBytes());
         __protocol.process_recv();
         //$('#view').val($('#view').val() + '\n' + String.fromCharCode(chr));
-    }
-}
-
-function key_write(e) {
-    if (typeof(e) == 'object' && e.keyCode == 13) {
-        on_write();
     }
 }
 
@@ -65,21 +59,21 @@ function send_status(d) {
     }
 }
 
-function open() {
-
-}
-
-function fail_connect() {
-    $('#info').text('try to connect count ' + fail_count);
-    return function() {
-        connect();
-    }
-}
 function close() {
-    if (fail_count > 5) {
+    if (__MY_MPD.fail_count > 5) {
         $('#info').text('fail connect');
         return;
     }
-    setTimeout(connect, 5000 * fail_count);
-    fail_count++;
+    setTimeout(__MY_MPD.connect, 5000 * __MY_MPD.fail_count);
+    __MY_MPD.fail_count++;
 }
+}
+
+$(document)
+.on('click', '#send', __MY_MPD.on_write)
+.on('keypress', '#send_text', __MY_MPD.key_write)
+.on('click', '#clear_log', __MY_MPD.clear_log)
+.on('click', '._cmd', __MY_MPD.send_cmd);
+
+
+__MY_MPD.connect();
