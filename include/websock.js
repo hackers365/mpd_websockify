@@ -225,7 +225,6 @@ function send_string(str) {
 
 function recv_message(e) {
     //Util.Debug(">> recv_message: " + e.data.length);
-
     try {
         decode_message(e.data);
         if (rQlen() > 0) {
@@ -258,7 +257,7 @@ function recv_message(e) {
 
 
 // Set event handlers
-function on(evt, handler) { 
+function on(evt, handler) {
     eventHandlers[evt] = handler;
 }
 

@@ -31,7 +31,81 @@ var __CODE = {
     MSP_EEPROM_WRITE    :250,
     MSP_DEBUG           :254
 }
+
+var acc_roll = [], //dataPoints.
+    acc_roll_backup = [];
+var acc_pitch = []; //dataPoints.
+var acc_yaw = []; //dataPoints.
+
+var chart = new CanvasJS.Chart("chartContainer",{
+    title :{
+    text: "Live Data"
+    },
+    axisX: {
+    title: "Axis X Title"
+    },
+    axisY: {
+    title: "value",
+    minimum: -1000
+    },
+    data: [{
+    type: "line",
+    dataPoints : acc_roll,
+        showInLegend: true,
+        name: "ACC_roll",
+        legendText: "ACC_roll"
+    },
+    {
+        type: 'line',
+        dataPoints: acc_pitch,
+        showInLegend: true,
+        name: "ACC_pitch",
+        legendText: "ACC_pitch",
+        click: function(e) {
+            console.log(e);
+        }
+    },
+    {
+        type: 'line',
+        dataPoints: acc_yaw,
+        showInLegend: true,
+        name: "ACC_yaw",
+        legendText: "ACC_yaw"
+    }]
+});
+
+chart.render();
+
+
+var xVal = acc_roll.length + 1;
+var yVal = 100;
+var updateInterval = 50;
+
+function updateChart(d) {
+    acc_roll.push({x: xVal,y: d[0]});
+    acc_pitch.push({x: xVal,y: d[1]});
+    acc_yaw.push({x: xVal,y: d[2]});
+    if (acc_roll.length > 100 )
+    {
+        acc_roll.shift();
+    }
+    if (acc_pitch.length > 100 )
+    {
+        acc_pitch.shift();
+    }
+    if (acc_yaw.length > 100 )
+    {
+        acc_yaw.shift();
+    }
+    xVal++;
+    chart.render();
+    // update chart after specified time.
+};
+
 var __type_cb = {
+    get_val: function(d) {
+        return ((d & 0x8000) == 0) ? d : parseInt('-' + (~(d - 1) & 0x7fff));
+    },
     MSP_IDENT: function(data) {
         if (data) {
             //send or recv
@@ -44,12 +118,41 @@ var __type_cb = {
     MSP_STATUS: function(data) {
         if (data) {
             //send or recv
-
+            $('#cycle_time').text((data[1] << 8) | data[0]);
+            $('#i2c_error_count').text((data[3] << 8) | data[2]);
         } else {
             return new Uint8Array(0);
         }
     },
-    MSP_RAW_IMU: function(data) {},
+    MSP_RAW_IMU: function(data) {
+        if (data) {
+            var ds = [
+                __type_cb.get_val((data[1] << 8) | data[0]),
+                __type_cb.get_val((data[3] << 8) | data[2]),
+                __type_cb.get_val((data[5] << 8) | data[4]),
+                __type_cb.get_val((data[7] << 8) | data[6]),
+                __type_cb.get_val((data[9] << 8) | data[8]),
+                __type_cb.get_val((data[11] << 8) | data[10]),
+                __type_cb.get_val((data[13] << 8) | data[12]),
+                __type_cb.get_val((data[15] << 8) | data[14]),
+                __type_cb.get_val((data[17] << 8) | data[16]),
+
+            ];
+            //console.log(data);
+            $('#acc_roll').text(ds[0]);
+            $('#acc_pitch').text(ds[1]);
+            $('#acc_yaw').text(ds[2]);
+            $('#gyro_roll').text(ds[3]);
+            $('#gyro_pitch').text(ds[4]);
+            $('#gyro_yaw').text(ds[5]);
+            $('#mag_roll').text(ds[6]);
+            $('#mag_pitch').text(ds[7]);
+            $('#mag_yaw').text(ds[8]);
+            updateChart(ds)
+        } else {
+            return new Uint8Array(0);
+        }
+    },
     MSP_SERVO: function(data) {},
     MSP_MOTOR: function(data) {
         if (data) {

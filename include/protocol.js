@@ -78,7 +78,7 @@ var __protocol = {
             recv_checksum = data[data_len + __protocol.DATA_OFFSET],
             type_offset = data[__protocol.TYPE_OFFSET];
         if (recv_checksum == checksum && __CODE2CB[type_offset]) {
-            __CODE2CB[type_offset](data.slice(__protocol.DATA_OFFSET, data_len));
+            __CODE2CB[type_offset](data.slice(__protocol.DATA_OFFSET, __protocol.DATA_OFFSET + data_len));
         }
     },
 

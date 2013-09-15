@@ -9,11 +9,13 @@ $(document)
 connect();
 
 //setInterval("on_write()", 1000);
-setInterval("get_status()", 1000);
+setInterval("get_status()", 100);
+//setTimeout("get_status()", 1000);
 function send_cmd() {
-    var $this = $(this),
-        cmd = $this.attr('cmd');
-    ws.send_string(cmd + "\n");
+    on_write();
+}
+
+function open() {
 }
 
 function connect() {
@@ -22,18 +24,14 @@ function connect() {
     ws.on('close', close);
     ws.on('open', open);
 
-    var r = ws.open('ws://192.168.14.170:12001', 'binary');
+    var r = ws.open('ws://127.0.0.1:12001', 'binary');
     console.log(r);
 }
-
-        var r = __MY_MPD.ws.open('__MY_MPD.ws://localhost:10001', 'base64');
-        console.log(r);
-    },
 
 function on_read() {
     var len = ws.rQlen();
     if (len > 0) {
-        __protocol.buf = buf.concat(ws.rQshiftBytes());
+        __protocol.buf = __protocol.buf.concat(ws.rQshiftBytes());
         __protocol.process_recv();
         //$('#view').val($('#view').val() + '\n' + String.fromCharCode(chr));
     }
@@ -49,31 +47,23 @@ function on_write() {
 }
 
 function get_status() {
-    send_status([__CODE.MSP_IDENT, __CODE.MSP_RC, __CODE.MSP_MOTOR]);
+    send_status([__CODE.MSP_IDENT, __CODE.MSP_RC,__CODE.MSP_STATUS,__CODE.MSP_RAW_IMU, __CODE.MSP_MOTOR]);
+    //send_status([__CODE.MSP_RAW_IMU]);
 }
 
 function send_status(d) {
-    console.log(d);
-    for(var i = 0;i<d.length;d++) {
-        ws.send(__protocol.get_msg_buf(d[i], __CODE2CB[d[i]]));
+    var a;
+    for(var i = 0;i<d.length;i++) {
+        a = __protocol.get_msg_buf(d[i], __CODE2CB[d[i]]());
+        //console.log(a);
+        ws.send(a);
     }
 }
 
 function close() {
-    if (__MY_MPD.fail_count > 5) {
-        $('#info').text('fail connect');
-        return;
-    }
-    setTimeout(__MY_MPD.connect, 5000 * __MY_MPD.fail_count);
-    __MY_MPD.fail_count++;
-}
+    ;
 }
 
-$(document)
-.on('click', '#send', __MY_MPD.on_write)
-.on('keypress', '#send_text', __MY_MPD.key_write)
-.on('click', '#clear_log', __MY_MPD.clear_log)
-.on('click', '._cmd', __MY_MPD.send_cmd);
 
 
-__MY_MPD.connect();
+//setInterval(function(){updateChart()}, updateInterval);

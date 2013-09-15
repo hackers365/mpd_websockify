@@ -16,6 +16,16 @@
             moto3: <span id="mi3"></span>
             moto4: <span id="mi4"></span>
         </div>
+        <div id="other_info">
+            cycle_time: <span id="cycle_time"></span>
+            i2c_error_count: <span id="i2c_error_count"></span>
+        </div>
+        <div id="imu_info">
+            ACC: roll:<span id="acc_roll"></span> pitch:<span id="acc_pitch"></span> yaw:<span id="acc_yaw"></span><br>
+            Gyro: roll:<span id="gyro_roll"></span> pitch:<span id="gyro_pitch"></span> yaw:<span id="gyro_yaw"></span><br>
+            MAG: roll:<span id="mag_roll"></span> pitch:<span id="mag_pitch"></span> yaw:<span id="mag_yaw"></span><br>
+        </div>
+        <div id="chartContainer"></div>
         <p>
             <input type="button" cmd="play" name="play" class="_cmd" value="play" />
             <input type="button" cmd="stop" name="stop" class="_cmd" value="stop" />
@@ -30,6 +40,7 @@
 
         </textarea>
         <script src="include/jquery.min.js"></script>
+        <script src="include/canvasjs.min.js"></script>
         <script src="include/base64.js"></script>
         <script src="include/util.js"></script>
         <script src="include/websock.js"></script>
