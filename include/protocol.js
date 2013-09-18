@@ -15,12 +15,20 @@ var __protocol = {
     DATA_OFFSET: 5,
     buf: [],
     count: 0,
+    get_buf: {},
 
-    get_msg_buf: function(type, data) {
+    get_msg_buf: function(type, data, is_buf) {
+        if (__protocol.get_buf[type] && type <= __CODE.MSP_WP) {
+            return __protocol.get_buf[type];
+        }
         var buffer = new ArrayBuffer(262);
         __protocol.init(buffer);
         var total_len = __protocol.assembly(type, buffer, data);
-        return Array.apply([], new Uint8Array(buffer, __protocol.FIRST_FLAG_OFFSET, total_len));
+        var d = Array.apply([], new Uint8Array(buffer, __protocol.FIRST_FLAG_OFFSET, total_len));
+        if (type <= __CODE.MSP_WP) {
+            __protocol.get_buf[type] = d;
+        }
+        return d;
     },
 
     init: function(buffer) {
@@ -38,16 +46,16 @@ var __protocol = {
 
         __protocol.assembly_data_by_type(type, buffer, data);
 
-        var checksum = __protocol.crc(Array.apply([], new Uint8Array(buffer, __protocol.CRC_DATA_OFFSET, __protocol.DATA_OFFSET - __protocol.CRC_DATA_OFFSET + data.length))),
-            total_len = __protocol.EXTRA_DATA_LEN + data.length;
-        d.setUint8(__protocol.DATA_OFFSET + data.length, checksum);
+        var checksum = __protocol.crc(Array.apply([], new Uint8Array(buffer, __protocol.CRC_DATA_OFFSET, __protocol.DATA_OFFSET - __protocol.CRC_DATA_OFFSET + data.byteLength))),
+            total_len = __protocol.EXTRA_DATA_LEN + data.byteLength;
+        d.setUint8(__protocol.DATA_OFFSET + data.byteLength, checksum);
         return total_len;
     },
 
     assembly_data_by_type: function(type, buffer, data) {
-        if (data.byteLength) {
-            ;
-        }
+        var b8 = new Uint8Array(buffer, __protocol.DATA_OFFSET, data.byteLength);
+        var db8 = new Uint8Array(data.buffer);
+        b8.set(db8);
     },
 
     crc: function(data) {
@@ -89,6 +97,7 @@ var __protocol = {
         while(__protocol.buf.length) {
             if (__protocol.process_init_flag()) {
                 if (__protocol.buf.length >= 4) {
+
                     data_len = __protocol.buf[__protocol.DATA_LENGTH_OFFSET];
                     total_len = __protocol.EXTRA_DATA_LEN + data_len;
                     if (__protocol.buf.length >= total_len) {
@@ -97,6 +106,7 @@ var __protocol = {
                     } else {
                         break;
                     }
+                    break;
                 } else {
                     //not end
                     break;

@@ -25,6 +25,7 @@
             Gyro: roll:<span id="gyro_roll"></span> pitch:<span id="gyro_pitch"></span> yaw:<span id="gyro_yaw"></span><br>
             MAG: roll:<span id="mag_roll"></span> pitch:<span id="mag_pitch"></span> yaw:<span id="mag_yaw"></span><br>
         </div>
+
         <div id="chartContainer"></div>
         <p>
             <input type="button" cmd="play" name="play" class="_cmd" value="play" />
@@ -32,13 +33,30 @@
             <input type="button" cmd="status" name="status" class="_cmd" value="status" />
             <input type="button" cmd="currentsong" name="currentsong" class="_cmd" value="get_current" />
         </p>
-        <p>
-        <input type="text" id="send_text" size=30 /><input id="send" type="button" value="send"/><input id="clear_log" type="button" value="clear log"/>
-        </p>
+
         <div id="info"></div>
         <textarea id="view" style="width:400;height:400;">
 
         </textarea>
+        <div id="debug">
+            debug1: <span id="debug1"></span>
+            debug2: <span id="debug2"></span>
+            debug3: <span id="debug3"></span>
+            debug4: <span id="debug4"></span>
+        </div>
+        <p>
+
+        <select id="change_hz">
+          <option value="0">stop</option>
+          <option value="50">50Hz</option>
+          <option value="20">20Hz</option>
+          <option value="10">10Hz</option>
+          <option value="1">1Hz</option>
+        </select>
+
+        <input id="send" type="button" value="send cmd"/>
+        <input id="change" type="button" value="change cmd"/>
+        </p>
         <script src="include/jquery.min.js"></script>
         <script src="include/canvasjs.min.js"></script>
         <script src="include/base64.js"></script>
